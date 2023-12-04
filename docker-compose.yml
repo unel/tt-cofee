@@ -1,0 +1,75 @@
+version: '3.9'
+
+services:
+  facade:
+    image: "traefik:v2.10"
+    container_name: facade-tra
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+
+  front:
+    build: 
+      context: ./front
+      dockerfile: Dockerfile.dev
+    container_name: front-sve
+    ports: 
+      - "8081:8080"
+
+    volumes: 
+      - ./front:/app
+      
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.front.rule=Host(`localhost`)"
+      - "traefik.http.routers.front.priority=1"
+
+  static_media:
+    image: nginx:alpine3.18
+    container_name: static-media-ng
+
+    environment:
+      - NGINX_PORT=8080
+
+    ports:
+      - "8082:8080"
+
+    volumes:
+      - ./static_media/nginx/etc/nginx.conf:/etc/nginx/nginx.conf
+      - ./static_media/nginx/etc/conf.d:/etc/nginx/conf.d
+      - ./static_media/media:/var/www
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.strip_media.stripprefix.prefixes=/media,/media/" 
+      - "traefik.http.routers.static_media.rule=Host(`localhost`) && (Path(`/media`) || PathPrefix(`/media/`))" 
+      - "traefik.http.routers.static_media.priority=100" 
+      - "traefik.http.routers.static_media.middlewares=strip_media@docker"
+      - "traefik.http.services.static_media.loadbalancer.server.port=8080"
+
+  back:
+    image: "wiremock/wiremock:3.3.1-1"
+    container_name: back-mock
+    volumes:
+      - ./back/wiremock:/home/wiremock
+
+    ports:
+      - "8083:8080"
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.strip_api.stripprefix.prefixes=/api,/api/" 
+      - "traefik.http.routers.back.rule=Host(`localhost`) && (Path(`/api`) || PathPrefix(`/api/`))" 
+      - "traefik.http.routers.back.priority=50" 
+      - "traefik.http.routers.back.middlewares=strip_api@docker"
+
+    entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]
