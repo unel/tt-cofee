@@ -10,6 +10,7 @@
                 "url": "/coffee/random_coffee"
             },
             "response": {
+                "fixedDelayMilliseconds": 3000,
                 "proxyBaseUrl": "http://localhost:8080/coffee/412",
                 "proxyUrlPrefixToRemove": "/coffee/random_coffee"
             }
@@ -23,6 +24,7 @@
                 "url": "/coffee/random_coffee"
             },
             "response": {
+                "fixedDelayMilliseconds": 3000,
                 "proxyBaseUrl": "http://localhost:8080/coffee/1323",
                 "proxyUrlPrefixToRemove": "/coffee/random_coffee"
             }
@@ -36,6 +38,7 @@
                 "url": "/coffee/random_coffee"
             },
             "response": {
+                "fixedDelayMilliseconds": 3000,
                 "proxyBaseUrl": "http://localhost:8080/coffee/2476",
                 "proxyUrlPrefixToRemove": "/coffee/random_coffee"
             }
