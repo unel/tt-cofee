@@ -1,0 +1,10 @@
+{
+  "priority": 1000,
+  "request": {
+    "method": "GET",
+    "urlPattern": ".*"
+  },
+  "response": {
+    "proxyBaseUrl": "https://random-data-api.com/api"
+  }
+}

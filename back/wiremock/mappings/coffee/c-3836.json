@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/3836"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 3835,
+      "uid": "0c4c1af9-3659-4618-a452-1c905550a7c1",
+      "blend_name": "Blue America",
+      "origin": "Harrar, Ethiopia",
+      "variety": "Obata",
+      "notes": "rounded, full, marshmallow, corriander, brown sugar",
+      "intensifier": "lingering"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

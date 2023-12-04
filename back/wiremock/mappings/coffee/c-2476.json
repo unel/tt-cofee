@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/2476"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 2476,
+      "uid": "3574ac6b-b8d2-4c36-b656-f9d2ba9f594b",
+      "blend_name": "Winter America",
+      "origin": "Volcan, Panama",
+      "variety": "Tafari-Kela",
+      "notes": "deep, coating, fresh wood, hibiscus, vanilla",
+      "intensifier": "sharp"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

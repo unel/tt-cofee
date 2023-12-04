@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/412"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 412,
+      "uid": "73a14495-de0b-4f21-87a1-f405e4d02805",
+      "blend_name": "Red Symphony",
+      "origin": "Brunca, Costa Rica",
+      "variety": "Kent",
+      "notes": "unbalanced, round, black cherry, granola, wheat",
+      "intensifier": "sharp"
+  },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

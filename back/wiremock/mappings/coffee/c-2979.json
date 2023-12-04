@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/2979"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 2979,
+      "uid": "6bec8001-263c-4147-b19c-fd8de9331802",
+      "blend_name": "Jacked Pie",
+      "origin": "Kayanza, Burundi",
+      "variety": "S795",
+      "notes": "faint, smooth, fresh wood, musty, sugar cane",
+      "intensifier": "dry"
+  },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

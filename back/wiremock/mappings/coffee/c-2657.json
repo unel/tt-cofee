@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/2657"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 2657,
+      "uid": "38dcd2db-08ff-4fcc-9231-7997a04172eb",
+      "blend_name": "Captain's Light",
+      "origin": "Kayanza, Burundi",
+      "variety": "Pink Bourbon",
+      "notes": "complex, big, orange creamsicle, ginger, black-tea",
+      "intensifier": "pointed"
+  },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

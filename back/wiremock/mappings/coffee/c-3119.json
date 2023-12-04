@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/3119"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 3110,
+      "uid": "c6cb56e0-6bf1-4fe3-86e6-44e8fe77a62a",
+      "blend_name": "Heart Utopia",
+      "origin": "Raimi, Yemen",
+      "variety": "Blue Mountain",
+      "notes": "pointed, juicy, tomato, lychee, corriander",
+      "intensifier": "bright"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/1323"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 1323,
+      "uid": "53205aac-abf9-4051-9220-0f17eaaa3b55",
+      "blend_name": "Green Light",
+      "origin": "Huehuetenango, Guatemala",
+      "variety": "Villa Sarchi",
+      "notes": "deep, tea-like, tomato, mango, hay",
+      "intensifier": "dull"
+  },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/coffee/6613"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "id": 6613,
+      "uid": "b9d41ae0-7181-41cb-9857-1583c66a16da",
+      "blend_name": "Pumpkin-spice Java",
+      "origin": "Nakuru, Kenya",
+      "variety": "Bourbon",
+      "notes": "delicate, velvety, dill, hay, magnolia",
+      "intensifier": "vibrant"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
