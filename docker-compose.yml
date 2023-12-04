@@ -44,8 +44,11 @@ services:
       - "8082:8080"
 
     volumes:
+
       - ./static_media/nginx/etc/nginx.conf:/etc/nginx/nginx.conf
       - ./static_media/nginx/etc/conf.d:/etc/nginx/conf.d
+      - ./static_media/nginx/entrypoint.d:/docker-entrypoint.d
+      - ./static_media/nginx/cache:/var/www_cache
       - ./static_media/media:/var/www
 
     labels:
