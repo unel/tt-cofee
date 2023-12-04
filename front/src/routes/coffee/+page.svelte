@@ -2,6 +2,8 @@
     import { PageLogic } from "$lib/stores/cofee_page";
     import { loadRandomCoffee } from "$lib/api/coffee";
 
+    import CoffeeCard from "$lib/components/coffee-card/coffee-card.svelte";
+
     const pageLogic = new PageLogic({
         coffeeLoader: () => loadRandomCoffee(),
         loadInterval: 30000,
@@ -22,11 +24,27 @@
     <div>timer: {$timer_store}</div>
     <hr />
 
-    {#each $coffee_store as coffee}
-        {coffee.blend_name}
-    {/each}
+    <section class="list">
+        {#each $coffee_store as coffee}
+            <CoffeeCard coffee={coffee} />
+        {/each}
+
+        {#if 1 || $is_loading}
+            <CoffeeCard />
+        {/if}
+    </section>
+    
 
     <hr />
 
     <button on:click={loadCoffee} disabled={$is_loading}>load moare</button>
 </section>
+
+
+<style>
+    .list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+    }
+</style>

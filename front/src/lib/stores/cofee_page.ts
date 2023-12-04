@@ -67,6 +67,8 @@ export class PageLogic {
                 }
             });
         }
+
+        this.loadCoffee();
     }
 
     async loadCoffee() {
