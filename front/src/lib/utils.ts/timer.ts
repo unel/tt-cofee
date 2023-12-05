@@ -1,40 +1,39 @@
 type TTimerID = NodeJS.Timeout | ReturnType<Window['setTimeout']>;
 
-
 // this function like setInterval, but doesn't stack callbacks
 export function setTimer(duration = 1000, callback: (delta: number) => unknown) {
-    let timeoutId: TTimerID;
-    let isRunning = true;
-    let startTime: number;
-    
-    const delayTick = () => {
-        clear();
-        startTime = Date.now();
-        timeoutId = setTimeout(() => {
-            // debugger;
-            if (!isRunning) {
-                return;
-            }
+	let timeoutId: TTimerID;
+	let isRunning = true;
+	let startTime: number;
 
-            const delta = Date.now() - startTime;
-            callback(delta);
+	const delayTick = () => {
+		clear();
+		startTime = Date.now();
+		timeoutId = setTimeout(() => {
+			// debugger;
+			if (!isRunning) {
+				return;
+			}
 
-            delayTick();
-        }, duration);
-        isRunning = true;
-    };
+			const delta = Date.now() - startTime;
+			callback(delta);
 
-    const clear = () => {
-        clearTimeout(timeoutId);
-    }
+			delayTick();
+		}, duration);
+		isRunning = true;
+	};
 
-    delayTick();
+	const clear = () => {
+		clearTimeout(timeoutId);
+	};
 
-    // function for stop timer forever
-    return () => {
-        clear();
-        isRunning = false;
-        startTime = 0;
-        timeoutId = 0;
-    };
+	delayTick();
+
+	// function for stop timer forever
+	return () => {
+		clear();
+		isRunning = false;
+		startTime = 0;
+		timeoutId = 0;
+	};
 }

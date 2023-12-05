@@ -1,5 +1,5 @@
 export type TRoute = {
-    id: string;
-    path: string;
-    title: string;
-}
+	id: string;
+	path: string;
+	title: string;
+};
