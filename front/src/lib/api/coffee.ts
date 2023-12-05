@@ -2,7 +2,7 @@ import type { TCoffee, TCoffeeIntensifier, TCoffeeRaw } from '$lib/types/tcoffee
 
 const API_DEV_HOST = '';
 const API_PROD_HOST = 'https://random-data-api.com';
-const API_HOST = 0 ? API_PROD_HOST : API_DEV_HOST;
+const API_HOST = 1 ? API_PROD_HOST : API_DEV_HOST;
 
 const API_BASE_URL = `${API_HOST}/api/coffee`;
 
