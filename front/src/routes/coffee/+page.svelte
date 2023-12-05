@@ -1,4 +1,10 @@
-<script>
+<script lang="ts" context="module">
+    function formatTime(ms: number): string {
+        return (ms / 1000).toFixed(0);
+    }
+</script>
+
+<script lang="ts">
     import { PageLogic } from "$lib/stores/cofee_page";
     import { loadRandomCoffee } from "$lib/api/coffee";
 
@@ -17,34 +23,67 @@
     $: coffee_store = pageLogic.cofeeStore;
     $: timer_store= pageLogic.timeToLoadStore;
     $: is_loading = pageLogic.isLoadingStore;
+    $: is_loading_available = pageLogic.isLoadingAvailable;
+
+    $: can_load = !$is_loading && $is_loading_available;
+
+
+    let placeHolder: HTMLElement
+
+    $: {
+        if (placeHolder) {
+            placeHolder.scrollIntoView({
+                behavior: 'smooth',
+            });
+        }
+    }
 </script>
 
-
-<section>
-    <div>timer: {$timer_store}</div>
-    <hr />
-
+<section class="root">
     <section class="list">
-        {#each $coffee_store as coffee}
+        {#each $coffee_store as coffee (coffee.uid)}
             <CoffeeCard coffee={coffee} />
         {/each}
 
-        {#if 1 || $is_loading}
-            <CoffeeCard />
+        {#if $is_loading}
+            <CoffeeCard bind:root={placeHolder}/>
         {/if}
     </section>
     
-
-    <hr />
-
-    <button on:click={loadCoffee} disabled={$is_loading}>load moare</button>
+    <section class="controls">
+        <button class="load" on:click={loadCoffee} disabled={!can_load}>load moare</button>
+        
+        {#if $is_loading}
+            <span class="sidenote">loading..</span>
+        {:else}
+            {#if $is_loading_available && ($timer_store !== undefined)}
+                <span class="sidenote">next item will be loaded automatically after {formatTime($timer_store)} seconds</span>
+            {:else}
+                <span class="sidenote">loading not available more</span>
+            {/if}
+        {/if}
+    </section>
 </section>
 
 
 <style>
+    .root {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+    }
+
     .list {
         display: flex;
         flex-direction: column;
         row-gap: 8px;
+    }
+
+    .sidenote {
+        color: gray;
+    }
+
+    .load {
+        padding: 8px 4px;
     }
 </style>

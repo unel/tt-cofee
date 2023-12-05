@@ -10,6 +10,7 @@ type TCoffeeLoader = () => Promise<TCoffee>;
 
 const COFFEE_ROUTE = ROUTES_BY_ID['coffee'];
 const DEFAULT_CHECK_INTERVAL = 1000; // interval between checking data freshness
+const DUPLICATES_TRESHOLD = 2;
 
 const noop = () => {};
 
@@ -24,6 +25,9 @@ export class PageLogic {
     cofeeStore: Readable<TCoffee[]>;
     _updateCoffeeStore: (update: Updater<TCoffee[]>) => void = noop;
 
+    isLoadingAvailable: Readable<boolean>;
+    _setIsLoadingAvailable: (value: boolean) => void = noop;
+
     isLoadingStore: Readable<boolean>;
     _setIsLoading: (value: boolean) => void = noop;
 
@@ -34,9 +38,13 @@ export class PageLogic {
 
     _lastUpdateTime: number = Date.now();
 
-    _clearTicking: () => void = noop;
+    _clearTimer: () => void = noop;
 
     _pageUnsub: () => void = noop;
+
+    _loadedItems: Set<string> = new Set();
+
+    _duplicatesCount: number = 0;
 
     constructor({ coffeeLoader, loadInterval, checkInterval }: { coffeeLoader: TCoffeeLoader, loadInterval?: number, checkInterval?: number }) {
         this._loader = coffeeLoader;
@@ -44,6 +52,10 @@ export class PageLogic {
 
         this.cofeeStore = readable<TCoffee[]>([], (_, update) => {
             this._updateCoffeeStore = update;
+        });
+
+        this.isLoadingAvailable = readable(true, (set) => {
+            this._setIsLoadingAvailable = set;
         });
 
         this.isLoadingStore = readable(false, (set) => {
@@ -59,7 +71,7 @@ export class PageLogic {
                 this._updateTimeToLoad = update;
             });
 
-            this._clearTicking = setTimer(checkInterval ?? DEFAULT_CHECK_INTERVAL, (tickDelta: number) => {
+            this._clearTimer = setTimer(checkInterval ?? DEFAULT_CHECK_INTERVAL, (tickDelta: number) => {
                 const delta = Date.now() - this._lastUpdateTime;
                 this._updateTimeToLoad(time => time - tickDelta);
                 if (delta >= loadInterval && this.isPageActive && !get(this.isLoadingStore)) {
@@ -76,6 +88,10 @@ export class PageLogic {
             throw new Error("can't work in destroyed state");
         }
 
+        if (!get(this.isLoadingAvailable)) {
+            throw new Error("loading disabled");
+        }
+
         if (this._loadPromise) {
             return this._loadPromise;
         }
@@ -84,14 +100,29 @@ export class PageLogic {
             try {
                 this._setIsLoading(true);
                 const coffee = await this._loader();
+                
+                // someone disabled loading during loading process
+                // I think, we should ignore this data;
+                if (!get(this.isLoadingAvailable)) {
+                    return;
+                }
 
-                this._updateCoffeeStore(( store) => store.concat([coffee]));
+                if (!this._loadedItems.has(coffee.uid)) {
+                    this._updateCoffeeStore(( store) => store.concat([coffee]));
+                    this._loadedItems.add(coffee.uid);
+                } else {
+                    this._duplicatesCount += 1;
+                }
 
                 this._loadPromise = undefined;
                 this._lastUpdateTime = Date.now();
                 if (this.loadInterval !== undefined) {
                     const li = this.loadInterval
                     this._updateTimeToLoad(() => li);
+                }
+
+                if (this._duplicatesCount >= DUPLICATES_TRESHOLD) {
+                    this.disableLoading();
                 }
                 return resolve();
             } catch (e) {
@@ -105,12 +136,17 @@ export class PageLogic {
         return this._loadPromise;
     }
 
+    disableLoading() {
+        this._setIsLoadingAvailable(false);
+        this._clearTimer();
+    }
+
     destroy() {
         this.isDestroyed = true;
 
-        this._clearTicking();
+        this._clearTimer();
         this._pageUnsub();
-        this._clearTicking = noop;
+        this._clearTimer = noop;
         this._updateCoffeeStore = noop;
         this._setIsLoading = noop;
     }
