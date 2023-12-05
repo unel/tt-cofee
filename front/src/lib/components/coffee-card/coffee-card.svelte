@@ -28,6 +28,10 @@
 		<div class="field notes">
 			<CoffeeNotes notes={coffee.notes} />
 		</div>
+
+		<div class="intensifier">
+			{coffee.intensifier}
+		</div>
 	</section>
 {:else}
 	<section class="placeholder" bind:this={root}>
@@ -38,13 +42,19 @@
         <div class="field origin" />
 		<div class="field blend" />
         <div class="field variety"/>
-
-		<div class="field notes" />
+		<div class="field notes">
+			<div class="note" />
+			<div class="note" />
+			<div class="note" />
+			<div class="note" />
+			<div class="note" />
+		</div>
 	</section>
 {/if}
 
 <style lang="less">
 	.coffee {
+		position: relative;
 		display: flex;
 		max-width: 500px;
 
@@ -55,29 +65,43 @@
 
 		border: 1px solid silver;
 		border-radius: 4px;
-		padding: 8px;
-
 		row-gap: 4px;
+		padding-bottom: 8px;
 
 		.field {
+			margin: 0 8px;
 			display: block;
 			max-width: 100%;
 		}
 
 		.blend {
-
+			font-weight: bold;
+			font-size: 18px;
 		}
 
 		.origin {
+			font-size: 14px;
+			color: gray;
 		}
 
 		.variety {
-		}
-
-		.notes {
+			font-size: 14px;
 		}
 
 		.intensifier {
+			position: absolute;
+			right: 32px;
+			top: 28px;
+
+			font-size: 20px;
+			color: white;
+			text-transform: uppercase;
+			text-shadow: 4px 4px 10px #808080;
+
+			padding: 16px;
+
+			border-radius: 16px;
+			background-color: rgba(0, 0, 0, .2);
 		}
 
 		.picture {
@@ -104,27 +128,22 @@
 		.field {
 			display: block;
 			height: 14px;
-		}
-
-		
-		.blend {
-			background-color: var(--fields-bg);
-		}
-
-		.origin {
-			background-color: var(--fields-bg);
-
-		}
-
-		.variety {
 			background-color: var(--fields-bg);
 		}
 
 		.notes {
-			background-color: var(--fields-bg);
-		}
+			display: flex;
+			flex-direction: row;
+			justify-content: stretch;
+			column-gap: 8px;
 
-		.picture {
+			background-color: white;
+
+			.note {
+				flex-grow: 1;
+				display: block;
+				background-color: var(--fields-bg);
+			}
 		}
 	}
 </style>

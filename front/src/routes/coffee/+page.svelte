@@ -77,7 +77,7 @@
     .list {
         display: flex;
         flex-direction: column;
-        row-gap: 8px;
+        row-gap: 16px;
     }
 
     .sidenote {
