@@ -40,7 +40,7 @@
         {
             "scenarioName": "Random coffee",
             "requiredScenarioState": "c-2476",
-            "newScenarioState": "Started",
+            "newScenarioState": "c-2657",
             "request": {
                 "method": "GET",
                 "url": "/coffee/random_coffee"
@@ -52,6 +52,96 @@
                     "upper": 700
                 },
                 "proxyBaseUrl": "http://localhost:8080/coffee/2476",
+                "proxyUrlPrefixToRemove": "/coffee/random_coffee"
+            }
+        },
+        {
+            "scenarioName": "Random coffee",
+            "requiredScenarioState": "c-2657",
+            "newScenarioState": "c-2979",
+            "request": {
+                "method": "GET",
+                "url": "/coffee/random_coffee"
+            },
+            "response": {
+                "delayDistribution": {
+                    "type": "uniform",
+                    "lower": 100,
+                    "upper": 700
+                },
+                "proxyBaseUrl": "http://localhost:8080/coffee/2657",
+                "proxyUrlPrefixToRemove": "/coffee/random_coffee"
+            }
+        },
+        {
+            "scenarioName": "Random coffee",
+            "requiredScenarioState": "c-2979",
+            "newScenarioState": "c-3119",
+            "request": {
+                "method": "GET",
+                "url": "/coffee/random_coffee"
+            },
+            "response": {
+                "delayDistribution": {
+                    "type": "uniform",
+                    "lower": 100,
+                    "upper": 700
+                },
+                "proxyBaseUrl": "http://localhost:8080/coffee/2979",
+                "proxyUrlPrefixToRemove": "/coffee/random_coffee"
+            }
+        },
+        {
+            "scenarioName": "Random coffee",
+            "requiredScenarioState": "c-3119",
+            "newScenarioState": "c-3836",
+            "request": {
+                "method": "GET",
+                "url": "/coffee/random_coffee"
+            },
+            "response": {
+                "delayDistribution": {
+                    "type": "uniform",
+                    "lower": 100,
+                    "upper": 700
+                },
+                "proxyBaseUrl": "http://localhost:8080/coffee/3119",
+                "proxyUrlPrefixToRemove": "/coffee/random_coffee"
+            }
+        },
+        {
+            "scenarioName": "Random coffee",
+            "requiredScenarioState": "c-3836",
+            "newScenarioState": "c-6613",
+            "request": {
+                "method": "GET",
+                "url": "/coffee/random_coffee"
+            },
+            "response": {
+                "delayDistribution": {
+                    "type": "uniform",
+                    "lower": 100,
+                    "upper": 700
+                },
+                "proxyBaseUrl": "http://localhost:8080/coffee/3836",
+                "proxyUrlPrefixToRemove": "/coffee/random_coffee"
+            }
+        },
+        {
+            "scenarioName": "Random coffee",
+            "requiredScenarioState": "c-6613",
+            "newScenarioState": "Started",
+            "request": {
+                "method": "GET",
+                "url": "/coffee/random_coffee"
+            },
+            "response": {
+                "delayDistribution": {
+                    "type": "uniform",
+                    "lower": 100,
+                    "upper": 700
+                },
+                "proxyBaseUrl": "http://localhost:8080/coffee/6613",
                 "proxyUrlPrefixToRemove": "/coffee/random_coffee"
             }
         }
