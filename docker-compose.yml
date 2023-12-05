@@ -30,7 +30,7 @@ services:
       
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.front.rule=Host(`localhost`)"
+      - "traefik.http.routers.front.rule=HostRegexp(`{host:.+}`)"
       - "traefik.http.routers.front.priority=1"
 
   static_media:
@@ -54,7 +54,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.strip_media.stripprefix.prefixes=/media,/media/" 
-      - "traefik.http.routers.static_media.rule=Host(`localhost`) && (Path(`/media`) || PathPrefix(`/media/`))" 
+      - "traefik.http.routers.static_media.rule=HostRegexp(`{host:.+}`) && (Path(`/media`) || PathPrefix(`/media/`))" 
       - "traefik.http.routers.static_media.priority=100" 
       - "traefik.http.routers.static_media.middlewares=strip_media@docker"
       - "traefik.http.services.static_media.loadbalancer.server.port=8080"
@@ -71,7 +71,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.strip_api.stripprefix.prefixes=/api,/api/" 
-      - "traefik.http.routers.back.rule=Host(`localhost`) && (Path(`/api`) || PathPrefix(`/api/`))" 
+      - "traefik.http.routers.back.rule=HostRegexp(`{host:.+}`) && (Path(`/api`) || PathPrefix(`/api/`))" 
       - "traefik.http.routers.back.priority=50" 
       - "traefik.http.routers.back.middlewares=strip_api@docker"
 
