@@ -4,10 +4,11 @@
 	import CoffeeImage from './coffee-image.svelte';
 
 	export let coffee: TCoffee | undefined = undefined;
+	export let root: HTMLElement | undefined = undefined;
 </script>
 
 {#if coffee}
-	<section class="coffee">
+	<section class="coffee" bind:this={root}>
 		<div class="picture">
 			<CoffeeImage name={coffee.blend_name} />
         </div>
@@ -29,7 +30,7 @@
 		</div>
 	</section>
 {:else}
-	<section class="placeholder">
+	<section class="placeholder" bind:this={root}>
 		<div class="picture">
 			<CoffeeImage />
         </div>
@@ -45,6 +46,7 @@
 <style lang="less">
 	.coffee {
 		display: flex;
+		max-width: 500px;
 
         background-color: white;
 
@@ -59,6 +61,7 @@
 
 		.field {
 			display: block;
+			max-width: 100%;
 		}
 
 		.blend {
@@ -83,6 +86,7 @@
 
 	.placeholder {
 		display: flex;
+		max-width: 500px;
 
         background-color: white;
 
@@ -117,10 +121,6 @@
 		}
 
 		.notes {
-			background-color: var(--fields-bg);
-		}
-
-		.intensifier {
 			background-color: var(--fields-bg);
 		}
 
