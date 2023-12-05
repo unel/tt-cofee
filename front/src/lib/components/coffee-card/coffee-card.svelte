@@ -159,6 +159,7 @@
 
 		.coffee,
 		.placeholder {
+			width: 100%;
 			max-width: 25dvw;
 		}
 	}
