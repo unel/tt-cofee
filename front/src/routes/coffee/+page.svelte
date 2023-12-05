@@ -28,11 +28,12 @@
     $: can_load = !$is_loading && $is_loading_available;
 
 
-    let placeHolder: HTMLElement
+    let placeHolder: HTMLElement;
+    let controls: HTMLElement;
 
     $: {
         if (placeHolder) {
-            placeHolder.scrollIntoView({
+            controls?.scrollIntoView({
                 behavior: 'smooth',
             });
         }
@@ -50,7 +51,7 @@
         {/if}
     </section>
     
-    <section class="controls">
+    <section class="controls" bind:this={controls}>
         <button class="load" on:click={loadCoffee} disabled={!can_load}>load moare</button>
         
         {#if $is_loading}
