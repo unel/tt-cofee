@@ -11,19 +11,19 @@
 	<section class="coffee" bind:this={root}>
 		<div class="picture">
 			<CoffeeImage name={coffee.blend_name} />
-        </div>
+		</div>
 
-        <div class="field origin">
-            {coffee.origin}
-        </div>
+		<div class="field origin">
+			{coffee.origin}
+		</div>
 
 		<div class="field blend">
 			{coffee.blend_name}
 		</div>
 
-        <div class="field variety">
-            {coffee.variety}
-        </div>
+		<div class="field variety">
+			{coffee.variety}
+		</div>
 
 		<div class="field notes">
 			<CoffeeNotes notes={coffee.notes} />
@@ -37,11 +37,11 @@
 	<section class="placeholder" bind:this={root}>
 		<div class="picture">
 			<CoffeeImage />
-        </div>
+		</div>
 
-        <div class="field origin" />
+		<div class="field origin" />
 		<div class="field blend" />
-        <div class="field variety"/>
+		<div class="field variety" />
 		<div class="field notes">
 			<div class="note" />
 			<div class="note" />
@@ -56,11 +56,12 @@
 	.coffee {
 		position: relative;
 		display: flex;
+		flex-grow: 1;
 
-        background-color: white;
+		background-color: white;
 
-        flex-direction: column;
-        justify-content: stretch;
+		flex-direction: column;
+		justify-content: stretch;
 
 		border: 1px solid silver;
 		border-radius: 4px;
@@ -100,17 +101,18 @@
 			padding: 16px;
 
 			border-radius: 0 0 0 16px;
-			background-color: rgba(0, 0, 0, .2);
+			background-color: rgba(0, 0, 0, 0.2);
 		}
 	}
 
 	.placeholder {
 		display: flex;
+		flex-grow: 1;
 
-        background-color: white;
+		background-color: white;
 
-        flex-direction: column;
-        justify-content: stretch;
+		flex-direction: column;
+		justify-content: stretch;
 
 		border: 1px solid silver;
 		border-radius: 4px;
@@ -143,7 +145,8 @@
 	}
 
 	@media (max-device-width: 700px) {
-		.coffee, .placeholder {
+		.coffee,
+		.placeholder {
 			width: 100%;
 			max-width: 90dvw;
 		}
@@ -153,10 +156,10 @@
 		.placeholder {
 			width: 500px;
 		}
-		
-		.coffee, .placeholder {
-			max-width: 25dvw
-		}
 
+		.coffee,
+		.placeholder {
+			max-width: 25dvw;
+		}
 	}
 </style>

@@ -75,13 +75,13 @@
     .root {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         row-gap: 16px;
     }
 
     .list {
         display: flex;
-    
+        align-self: center;
     }
 
     .sidenote {
