@@ -18,7 +18,6 @@
 <style>
     .image {
         width: 100%;
-        max-width: 500px;
         aspect-ratio: 1;
     }
 </style>

@@ -22,6 +22,13 @@
         margin: 0;
     }
 
+    header {
+        position: sticky;
+        top: -10px;
+        background-color: white;
+        z-index: 2;
+    }
+
     main {
         height: 100svh;
         display: flex;
@@ -39,9 +46,9 @@
 <main>
     <header>
         <h1>{ currentRoute?.title ?? '-- unknown route --' }</h1>
+        <Navbar items={ ROUTES }/>
     </header>
 
-    <Navbar items={ ROUTES }/>
 
     <section class="content">
         <slot></slot>

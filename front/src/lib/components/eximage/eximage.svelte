@@ -14,28 +14,45 @@
     {#if src}
         <img class="image" src={src} on:load={toggleLoaded} alt={alt} />
     {/if}
+
     <div class="placeholder">
         <LoadingPlaceholder />
     </div>
 </div>
 
-<style>
+<style lang="less">
     .container {
         width: 100%;
+        position: relative;
     }
 
     .image, .placeholder {
         width: 100%;
         aspect-ratio: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        transition: opacity 250ms linear;
     }
 
-    .container.loading > .image {
-        opacity: 0;
-        width: 0;
-        height: 0;
+    .container.loading {
+        > .image {
+            opacity: 0;
+        }
+
+        > .placeholder {
+            opacity: 1;
+        }
     }
 
-    .container.initialized > .placeholder {
-        display: none;
+    .container.initialized {
+        > .placeholder {
+            opacity: 0;
+        }
+
+        > .image {
+            opacity: 1;
+        }
     }
 </style>

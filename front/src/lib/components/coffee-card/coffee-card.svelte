@@ -56,7 +56,6 @@
 	.coffee {
 		position: relative;
 		display: flex;
-		max-width: 500px;
 
         background-color: white;
 
@@ -90,8 +89,8 @@
 
 		.intensifier {
 			position: absolute;
-			right: 32px;
-			top: 28px;
+			right: 0;
+			top: 0;
 
 			font-size: 20px;
 			color: white;
@@ -100,17 +99,13 @@
 
 			padding: 16px;
 
-			border-radius: 16px;
+			border-radius: 0 0 0 16px;
 			background-color: rgba(0, 0, 0, .2);
-		}
-
-		.picture {
 		}
 	}
 
 	.placeholder {
 		display: flex;
-		max-width: 500px;
 
         background-color: white;
 
@@ -145,5 +140,23 @@
 				background-color: var(--fields-bg);
 			}
 		}
+	}
+
+	@media (max-device-width: 700px) {
+		.coffee, .placeholder {
+			width: 100%;
+			max-width: 90dvw;
+		}
+	}
+
+	@media (min-device-width: 701px) {
+		.placeholder {
+			width: 500px;
+		}
+		
+		.coffee, .placeholder {
+			max-width: 25dvw
+		}
+
 	}
 </style>

@@ -18,19 +18,16 @@
         column-gap: 4px;
 
         overflow-x: auto;
-        scrollbar-width: none;
+       
     }
-
-    .list::-webkit-scrollbar {
-        display: none;
-    }
-
 
     .note {
         padding: 8px 8px;
         border-radius: 4px;
         color: white;
         white-space: nowrap;
+
+        user-select: none;
     }
 
 
@@ -49,6 +46,26 @@
 
     .note:nth-of-type(4n) {
         background-color: #B2763D;
+        
+    }
+
+
+
+    @media (pointer: fine) {
+        
+    }
+
+    @media (pointer: coarse) {
+        .list {
+            scrollbar-width: none;
+        }
+        
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    @media (pointer: coarse) and (pointer: fine) {
         
     }
 </style>
