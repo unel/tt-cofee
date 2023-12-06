@@ -2,7 +2,7 @@
 This is a realisation of the test assigment
 
 
-For start the project type `docker compose up` in console, then open http://localhost site
+For start the project type `docker compose up` in console, then open http://localhost site. Run `bash gen-keys` in certs/traefik folder before starting for https support.
 You also could try to start only frontend by `npm run idnev` command from front folder, in this case site will be available by this address: http://localhost:8080
 
 First start could be take a long time due to slow dependencies installation.

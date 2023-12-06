@@ -7,14 +7,22 @@ services:
     command:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--accesslog=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
+      - "--providers.file.filename=/etc/traefik/tls.yml"
+      - "--entrypoints.http.address=:80"
+      - "--entrypoints.https.address=:443"
+
     ports:
       - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./facade/traefik/tls.yml:/etc/traefik/tls.yml"
+      - "./certs/traefik:/etc/ssl/traefik"
 
 
   front:
@@ -30,8 +38,15 @@ services:
       
     labels:
       - "traefik.enable=true"
+      
+      - "traefik.http.routers.front.entrypoints=http"
       - "traefik.http.routers.front.rule=HostRegexp(`{host:.+}`)"
       - "traefik.http.routers.front.priority=1"
+      
+      - "traefik.http.routers.front-ssl.entrypoints=https"
+      - "traefik.http.routers.front-ssl.tls=true"
+      - "traefik.http.routers.front-ssl.rule=HostRegexp(`{host:.+}`)"
+      - "traefik.http.routers.front-ssl.priority=1"
 
   static_media:
     image: nginx:alpine3.18
@@ -54,10 +69,18 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.strip_media.stripprefix.prefixes=/media,/media/" 
+      - "traefik.http.services.static_media.loadbalancer.server.port=8080"
+
+      - "traefik.http.routers.static_media.entrypoints=http" 
       - "traefik.http.routers.static_media.rule=HostRegexp(`{host:.+}`) && (Path(`/media`) || PathPrefix(`/media/`))" 
       - "traefik.http.routers.static_media.priority=100" 
       - "traefik.http.routers.static_media.middlewares=strip_media@docker"
-      - "traefik.http.services.static_media.loadbalancer.server.port=8080"
+
+      - "traefik.http.routers.static_media-ssl.entrypoints=https" 
+      - "traefik.http.routers.static_media-ssl.tls=true"
+      - "traefik.http.routers.static_media-ssl.rule=HostRegexp(`{host:.+}`) && (Path(`/media`) || PathPrefix(`/media/`))" 
+      - "traefik.http.routers.static_media-ssl.priority=100" 
+      - "traefik.http.routers.static_media-ssl.middlewares=strip_media@docker"
 
   back:
     image: "wiremock/wiremock:3.3.1-1"
@@ -71,8 +94,17 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.strip_api.stripprefix.prefixes=/api,/api/" 
+
+      - "traefik.http.routers.back.entrypoints=http" 
       - "traefik.http.routers.back.rule=HostRegexp(`{host:.+}`) && (Path(`/api`) || PathPrefix(`/api/`))" 
       - "traefik.http.routers.back.priority=50" 
       - "traefik.http.routers.back.middlewares=strip_api@docker"
+
+      - "traefik.http.routers.back-ssl.entrypoints=https" 
+      - "traefik.http.routers.back-ssl.tls=true" 
+      - "traefik.http.routers.back-ssl.rule=HostRegexp(`{host:.+}`) && (Path(`/api`) || PathPrefix(`/api/`))" 
+      - "traefik.http.routers.back-ssl.priority=50" 
+      - "traefik.http.routers.back-ssl.middlewares=strip_api@docker"
+
 
     entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]
