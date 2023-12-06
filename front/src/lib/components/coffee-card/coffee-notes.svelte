@@ -23,27 +23,28 @@
 	.note {
 		padding: 8px 8px;
 		border-radius: 4px;
-		color: white;
 		white-space: nowrap;
-
 		user-select: none;
 	}
 
-	// colors from: https://color.adobe.com/Cup%20Of%20Coffee-color-theme-14406987
 	.note:nth-of-type(1n) {
-		background-color: #4a2114;
+		background-color: var(--th-label-bg-color-1);
+		color: var(--th-label-fg-color-1);
 	}
 
 	.note:nth-of-type(2n) {
-		background-color: #75381b;
+		background-color: var(--th-label-bg-color-2);
+		color: var(--th-label-fg-color-2);
 	}
 
 	.note:nth-of-type(3n) {
-		background-color: #9a511c;
+		background-color: var(--th-label-bg-color-3);
+		color: var(--th-label-fg-color-3);
 	}
 
 	.note:nth-of-type(4n) {
-		background-color: #b2763d;
+		background-color: var(--th-label-bg-color-4);
+		color: var(--th-label-fg-color-4);
 	}
 
 	@media (pointer: fine) {

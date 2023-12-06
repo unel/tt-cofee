@@ -6,43 +6,47 @@
 </script>
 
 <nav>
-	<ul>
+	<ul class="items">
 		{#each items as item}
-			<li class="link_item" class:active={$page.route.id === item.path}>
-				<a href={item.path}>{item.id}</a>
+			<li class="link-item" class:active={$page.route.id === item.path}>
+				<a class="link" href={item.path}>{item.id}</a>
 			</li>
 		{/each}
 	</ul>
 </nav>
 
 <style lang="less">
-	ul {
+	.items {
+		padding: 0;
+		margin: 0;
+
 		display: flex;
 		flex-direction: row;
 		column-gap: 8px;
 	}
 
-	ul > li {
+	.link-item {
 		display: inline-block;
 		padding: 8px;
-		color: #b2763d;
 
+		background-color: var(--th-nav-item-bg-color);
+		color: var(--th-nav-item-fg-color);
 		font-size: 32px;
-	}
 
-	li.link_item {
 		&:hover {
-			color: #9a511c;
+			background-color: var(--th-nav-item-hovered-bg-color);
+			color: var(--th-nav-item-hovered-fg-color);
 		}
 
-		> a {
+		&.active {
+			background-color: var(--th-nav-item-active-bg-color);
+			color: var(--th-nav-item-active-fg-color);
+			text-decoration: underline;
+		}
+
+		> .link {
 			color: inherit;
 			text-decoration: none;
 		}
-	}
-
-	.link_item.active {
-		color: #9a511c;
-		text-decoration: underline;
 	}
 </style>

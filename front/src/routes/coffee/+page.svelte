@@ -88,7 +88,8 @@
 	}
 
 	.sidenote {
-		color: gray;
+		color: var(--th-note-bg-color);
+		color: var(--th-note-fg-color);
 	}
 
 	.controls {

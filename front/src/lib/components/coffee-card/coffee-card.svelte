@@ -58,12 +58,13 @@
 		display: flex;
 		flex-grow: 1;
 
-		background-color: white;
+		background-color: var(--th-bg-color);
+		color: var(--th-fg-color);
 
 		flex-direction: column;
 		justify-content: stretch;
 
-		border: 1px solid silver;
+		border: 1px solid var(--th-border-color);
 		border-radius: 4px;
 		row-gap: 4px;
 		padding-bottom: 8px;
@@ -81,7 +82,8 @@
 
 		.origin {
 			font-size: 14px;
-			color: gray;
+			background-color: var(--th-note-bg-color);
+			color: var(--th-note-fg-color);
 		}
 
 		.variety {
@@ -94,14 +96,14 @@
 			top: 0;
 
 			font-size: 20px;
-			color: white;
 			text-transform: uppercase;
-			text-shadow: 4px 4px 10px #808080;
 
 			padding: 16px;
 
 			border-radius: 0 0 0 16px;
-			background-color: rgba(0, 0, 0, 0.2);
+			color: var(--th-backdrop-fg-color);
+			background-color: var(--th-backdrop-bg-color);
+			text-shadow: 4px 4px 10px var(--th-shadow-color);
 		}
 	}
 
@@ -109,16 +111,16 @@
 		display: flex;
 		flex-grow: 1;
 
-		background-color: white;
+		background-color: var(--th-bg-color);
 
 		flex-direction: column;
 		justify-content: stretch;
 
-		border: 1px solid silver;
+		border: 1px solid var(--th-placeholder-color);
 		border-radius: 4px;
 		padding: 8px;
 
-		--fields-bg: silver;
+		--fields-bg: var(--th-placeholder-color);
 
 		row-gap: 8px;
 
@@ -134,7 +136,7 @@
 			justify-content: stretch;
 			column-gap: 8px;
 
-			background-color: white;
+			background-color: var(--th-bg-color);
 
 			.note {
 				flex-grow: 1;
