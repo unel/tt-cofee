@@ -6,6 +6,12 @@
 	$: currentRoute = ROUTES.find((route) => route.path === $page.route.id);
 </script>
 
+<svelte:head>
+	<title>
+		TA / {currentRoute?.title ?? ''}
+	</title>
+</svelte:head>
+
 <main>
 	<header>
 		<h1>{currentRoute?.title ?? '-- unknown route --'}</h1>
